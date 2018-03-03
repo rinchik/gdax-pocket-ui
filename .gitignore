@@ -64,4 +64,5 @@ typings/
 client/build.js
 
 #HTTPS
-encryption/
+encryption/*
+!encryption/.gitkeep

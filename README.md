@@ -1,8 +1,8 @@
 # GDAX Pocket UI
 
 
-Simple `Pocket UI` built on top of the https://github.com/coinbase/gdax-node GDAX API library, that allows you to use 
-GDAX API's credentials for "Manual Trades On The Go".
+Simple `Pocket UI` built on top of the [https://github.com/coinbase/gdax-node](https://github.com/coinbase/gdax-node)
+ GDAX API library, that allows you to use GDAX API's credentials for "Manual Trades On The Go".
 
 First iteration of this application is limited to [Etherium](https://www.ethereum.org/) account, but can easily be 
 extended over to Bitcoin and other Cryptocurrencies available on [Coinbase](https://www.coinbase.com/) and
@@ -11,6 +11,8 @@ extended over to Bitcoin and other Cryptocurrencies available on [Coinbase](http
 ![GDAX Pocket UI](https://raw.githubusercontent.com/rinchik/gdax-pocket-ui/master/docs/static/gdax-pocket-ui.gif)
 
 For security purposes, functionality is limited to:
+
+* Viewing account balances
 
 * Placing Sell/Buy limit orders
 
@@ -59,6 +61,15 @@ openssl x509 -req -days 365 -in mydomain.csr -signkey private.key -out server.cr
 ```
 
 This command has generated the certificate that later will be used by `/server.js`
+
+#### Setting up the environment
+
+Most of the sensitive account data is taken from the environment this application runs in. To set up your environment
+ take a look at the `/.env_example` file for all required environment names. To run it locally `cp .env_example` file to 
+`.env` and populate all black fields.
+
+You can get all requred API keys from from your active GDAX account: [https://www.gdax.com/settings/api](https://www.gdax.com/settings/api).
+
 
 
 #### Adding Users

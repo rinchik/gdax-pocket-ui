@@ -1,0 +1,226 @@
+body {
+    font-size: 100%;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: #ced2d5;
+    background-color: #0D141D;
+    padding: 0;
+    margin: 0;
+}
+
+.ticker-price {
+    position: absolute;
+    left: 1rem;
+    top: -0.5rem;
+    color: #4da53c;
+    font-size: 1rem;
+}
+
+.price, .order-buy {
+    color: #4da53c;
+}
+
+.price-decrease, .order-sell {
+    color: #d9534f;
+}
+
+.details__title {
+    width: 5rem;
+    display: inline-block;
+    margin: 0rem 0rem 0.5rem 0rem;
+}
+
+.details {
+    display: inline-block;
+    width: 12rem;
+}
+
+.orders {
+    margin: 0rem 1rem;
+}
+
+.orders--order {
+    margin: 0rem 0rem 0.5rem 0rem;
+}
+
+.order-price {
+    display: inline-block;
+    width: 8rem;
+}
+
+.price p {
+    display: inline-block;
+}
+
+.loader-container {
+    background-color: rgba(13, 20, 29, 0.8);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 998;
+}
+
+.blur {
+    filter: blur(5px);
+    transition: 2s filter linear;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    z-index: 999;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.ticker-chart {
+    width: 100%;
+}
+
+.ticker-container {
+    border-bottom: 4px solid #4da53c;
+}
+
+.ticker-container--red {
+    border-bottom: 4px solid #d9534f;
+}
+
+.balances {
+    color: hsla(0, 0%, 75%, 0.8);
+    padding: 1rem;
+}
+
+.balance {
+    position: absolute;
+    right: 1rem;
+    top: -0.5rem;
+    color: hsla(0, 0%, 90%, 0.8);;
+    font-size: 1rem;
+}
+
+.actions {
+    margin: 0rem 1rem;
+    text-align: center;
+}
+
+.button {
+    overflow: hidden;
+
+    margin: 0.5rem;
+    padding: 0.8rem 0.8rem;
+
+    cursor: pointer;
+    user-select: none;
+    transition: all 150ms linear;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none !important;
+    text-transform: none;
+    text-transform: capitalize;
+    background-color: #f2f2f2;
+
+    color: #202129;
+    border: 0 none;
+    border-radius: 4px;
+
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.button:hover {
+    transition: all 150ms linear;
+    opacity: 1;
+    color: #202129;
+    background-color: #e1e2e2;
+}
+
+.button:active {
+    transition: all 150ms linear;
+    opacity: 1;
+    background-color: #d5d6d6;
+}
+
+.button:focus {
+    outline: 1px dotted #959595;
+    outline-offset: -4px;
+}
+
+.button--action {
+    width: 30%;
+}
+
+.cancel-link {
+    display: inline-block;
+    margin: 0rem 1rem;
+}
+
+.button__action--sell {
+    background-color: #d9534f;
+    color: #FFF;
+}
+
+.button__action--sell:hover {
+    background-color: #d9534f;
+    color: #FFF;
+}
+
+.button__action--buy {
+    background-color: #4da53c;
+    color: #FFF;
+}
+
+.button__action--buy:hover {
+    background-color: #4da53c;
+    color: #FFF;
+}
+
+.balances__balance {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color: #f2f2f2;
+    margin: 1rem 0rem;
+    position: relative;
+    padding: 1rem;
+    border-radius: 4px;
+    color: #0D141D;
+}
+
+.balances__balance:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.balances__balance--currency {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: rgba(77,165,60, 0.5);
+}
+
+.link {
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -7,6 +7,8 @@ GDAX API's credentials for "Manual Trades On The Go".
 First iteration of this application is limited to [Etherium](https://www.ethereum.org/) account, but can easily be 
 extended over to Bitcoin and other Cryptocurrencies available on [Coinbase](https://www.coinbase.com/) and [GDAX](https://www.gdax.com).
 
+![GDAX Pocket UI](https://raw.githubusercontent.com/rinchik/gdax-pocket-ui/master/docs/static/gdax-pocket-ui.gif)
+
 ## Tech Stack
 
 UI part of this application is built purely with VanillaJS without any 3rd party libraries (except [socket.io](https://socket.io/) 

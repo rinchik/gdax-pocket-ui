@@ -20,6 +20,11 @@ For security purposes, functionality is limited to:
 
 * Canceling active orders
 
+**Note:** _For security purposes I highly recommend **not** to host this application on a server that is open to
+ general public. Close it off to your local network and access it remotely only through secure VPN connection.
+ You can find basing instructions on how to set up your personal VPN server in my article: 
+[https://blog.rinatussenov.com/personal-private-vpn-server-979cc9f0abaa](https://blog.rinatussenov.com/personal-private-vpn-server-979cc9f0abaa)_
+
 ## Tech Stack
 
 UI part of this application is built purely with VanillaJS without any 3rd party libraries 
@@ -139,3 +144,5 @@ Restart application server:
 
     yarn restart:prod
     
+
+GDAX Pocket UI is accessible on port `:4999` on your local/remote server.

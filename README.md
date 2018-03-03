@@ -10,6 +10,12 @@ extended over to Bitcoin and other Cryptocurrencies available on [Coinbase](http
 
 ![GDAX Pocket UI](https://raw.githubusercontent.com/rinchik/gdax-pocket-ui/master/docs/static/gdax-pocket-ui.gif)
 
+For security purposes, functionality is limited to:
+
+* Placing Sell/Buy limit orders
+
+* Canceling active orders
+
 ## Tech Stack
 
 UI part of this application is built purely with VanillaJS without any 3rd party libraries 
@@ -54,5 +60,33 @@ openssl x509 -req -days 365 -in mydomain.csr -signkey private.key -out server.cr
 
 This command has generated the certificate that later will be used by `/server.js`
 
+
+#### Adding Users
+
+This application is using `Basic HTTP Auth` for authentication. In order to add users, you need to edit `/users.config.js`
+
+**Note:** _In this iteration all passwords are stored in plain text, which is a security flaw, 
+be aware of it and account for it. it will change in the future when safe password generator is added._
+ 
+GDAX Pocket UI supports 2 types of users, `admin` and `guuest`. All application features are available for admin users,
+active trading functionality is disabled for guest users.
+  
+Admin user example:
+
+    {
+        username: 'admin',
+        password: 'admin for gdax pocket ui',
+        level: 'admin'
+    }
+    
+    
+Guest user example:
+
+
+    {
+        username: 'guest',
+        password: 'guest account',
+        level: 'guest'
+    }
 
 

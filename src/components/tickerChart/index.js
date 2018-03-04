@@ -4,7 +4,7 @@ class TickerChart {
     constructor(app) {
         this.app = app;
         this.containerHeight = 80;
-        this.containerWidth = window.screen.width;
+        this.containerWidth = window.screen.width-30;
         this.container = this._getContainer();
         this.lineContainer = new Svg('g');
         this.pointContainer = new Svg('g');
@@ -64,6 +64,8 @@ class TickerChart {
         aLine.setProp('y2', y2);
         aLine.setProp('stroke', color);
         aLine.setProp('stroke-width', width);
+        aLine.addClass('graph-element');
+        aLine.addClass('line');
 
         this._addLine(aLine)
     }
@@ -77,6 +79,7 @@ class TickerChart {
         circle.setProp('stroke', color);
         circle.setProp('r', width);
         circle.setProp('fill', color);
+        circle.addClass('graph-element');
 
         this._addCircle(circle)
     }
@@ -88,6 +91,7 @@ class TickerChart {
         polygon.setNonDomProp('line', arguments);
         polygon.setProp('points', polygonRectangle.join(' '));
         polygon.setProp('fill', fill);
+        polygon.addClass('graph-element');
 
         this._addPolygon(polygon)
     }

@@ -93,6 +93,7 @@ body {
 
 .ticker-chart {
     width: 100%;
+    margin-top: 2rem;
 }
 
 .ticker-container {

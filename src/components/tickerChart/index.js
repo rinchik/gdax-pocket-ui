@@ -3,7 +3,7 @@ import Svg from '../../html/svg';
 class TickerChart {
     constructor(app) {
         this.app = app;
-        this.containerHeight = 100;
+        this.containerHeight = 80;
         this.containerWidth = window.screen.width;
         this.container = this._getContainer();
         this.lineContainer = new Svg('g');

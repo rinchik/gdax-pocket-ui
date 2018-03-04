@@ -20,6 +20,11 @@ class Element {
         return this;
     }
 
+    setNonDomProp(property, value) {
+        this[property] = value;
+        return this;
+    }
+
     addClass(className) {
         this.element.classList.add(className);
         return this;

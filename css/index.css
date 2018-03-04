@@ -92,7 +92,7 @@ body {
 }
 
 .ticker-chart {
-    width: 100%;
+    margin: 2rem 0rem 0rem 1rem;
 }
 
 .ticker-container {
@@ -223,4 +223,8 @@ body {
 .link {
     text-decoration: none;
     cursor: pointer;
+}
+
+.graph-element {
+    transition: all 1s linear;
 }

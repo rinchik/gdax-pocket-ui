@@ -3,18 +3,23 @@ import Svg from '../../html/svg';
 class TickerChart {
     constructor(app) {
         this.app = app;
-        this.containerHeight = 100;
-        this.containerWidth = window.screen.width;
+        this.containerHeight = 80;
+        this.containerWidth = window.screen.width-30;
         this.container = this._getContainer();
         this.lineContainer = new Svg('g');
         this.pointContainer = new Svg('g');
+        this.polygonContainer = new Svg('g');
         this.lines = [];
         this.points = [];
-
+        this.polygons = [];
         this.step = 40;
+
+        this.elementsLimit = Math.ceil(this.containerWidth/this.step);
+
 
         this.lineContainer.render(this.container);
         this.pointContainer.render(this.container);
+        this.polygonContainer.render(this.container);
         return this;
     }
 
@@ -39,6 +44,7 @@ class TickerChart {
         const x2 = previousLine ? previousLine.x2 + this.step : this.step;
         const y2 = this.containerHeight - length;
 
+        this._createPolygon(x1, y1, x2, y2);
         this._createCircle(x2, y2);
         this._createLine(x1, y1, x2, y2);
 
@@ -58,6 +64,8 @@ class TickerChart {
         aLine.setProp('y2', y2);
         aLine.setProp('stroke', color);
         aLine.setProp('stroke-width', width);
+        aLine.addClass('graph-element');
+        aLine.addClass('line');
 
         this._addLine(aLine)
     }
@@ -71,16 +79,68 @@ class TickerChart {
         circle.setProp('stroke', color);
         circle.setProp('r', width);
         circle.setProp('fill', color);
+        circle.addClass('graph-element');
 
         this._addCircle(circle)
     }
 
-    _addLine(line) {
-        const linesLimit = Math.ceil(this.containerWidth/this.step);
+    _createPolygon (x1, y1, x2, y2) {
+        const fill = 'rgba(0,116,217, 0.5)';
+        const polygon = new Svg('polygon');
+        const polygonRectangle = this._getPolygonRectangle.apply(this, arguments);
+        polygon.setNonDomProp('line', arguments);
+        polygon.setProp('points', polygonRectangle.join(' '));
+        polygon.setProp('fill', fill);
+        polygon.addClass('graph-element');
 
+        this._addPolygon(polygon)
+    }
+
+    _getPolygonRectangle(x1, y1, x2, y2) {
+        let rectangle = [];
+
+        let point1 = [x1, y1];
+        rectangle = rectangle.concat(point1);
+
+        let point2 = [x2, y2];
+        rectangle = rectangle.concat(point2);
+
+        let point3 = [x2, this.containerHeight];
+        rectangle = rectangle.concat(point3);
+
+        let point4 = [x1, this.containerHeight];
+        rectangle = rectangle.concat(point4);
+
+        return rectangle;
+    }
+
+    _addPolygon(polygon) {
+        this.polygons.push(polygon);
+
+        if (this.polygons.length > this.elementsLimit) {
+            this._movePolygonsBack();
+        }
+
+        polygon.render(this.polygonContainer);
+    }
+
+    _movePolygonsBack() {
+        this.polygons.shift().remove();
+
+        this.polygons.forEach((polygon) => {
+            polygon.line[0] = polygon.line[0] - this.step;
+            polygon.line[2] = polygon.line[2] - this.step;
+
+            let updatedPolygonRectangle = this._getPolygonRectangle.apply(this, polygon.line);
+            polygon.setProp('points', updatedPolygonRectangle.join(' '));
+            polygon.setNonDomProp('line', polygon.line);
+        });
+    }
+
+    _addLine(line) {
         this.lines.push(line);
 
-        if (this.lines.length > linesLimit) {
+        if (this.lines.length > this.elementsLimit) {
             this._moveLinesBack();
         }
 
@@ -100,19 +160,17 @@ class TickerChart {
     }
 
     _addCircle(circle) {
-        const pointsLimit = Math.ceil(this.containerWidth/this.step);
-
         this.points.push(circle);
 
-        if (this.points.length > pointsLimit) {
-            this._movePointssBack();
+        if (this.points.length > this.elementsLimit) {
+            this._movePointsBack();
         }
 
         circle.render(this.pointContainer);
 
     }
 
-    _movePointssBack() {
+    _movePointsBack() {
         this.points.shift().remove();
 
         this.points.forEach((point) => {

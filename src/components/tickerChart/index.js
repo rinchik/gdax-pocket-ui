@@ -8,13 +8,18 @@ class TickerChart {
         this.container = this._getContainer();
         this.lineContainer = new Svg('g');
         this.pointContainer = new Svg('g');
+        this.polygonContainer = new Svg('g');
         this.lines = [];
         this.points = [];
-
+        this.polygons = [];
         this.step = 40;
+
+        this.elementsLimit = Math.ceil(this.containerWidth/this.step);
+
 
         this.lineContainer.render(this.container);
         this.pointContainer.render(this.container);
+        this.polygonContainer.render(this.container);
         return this;
     }
 
@@ -41,6 +46,7 @@ class TickerChart {
 
         this._createCircle(x2, y2);
         this._createLine(x1, y1, x2, y2);
+        this._createPolygon(x1, y1, x2, y2);
 
     }
 
@@ -75,12 +81,63 @@ class TickerChart {
         this._addCircle(circle)
     }
 
-    _addLine(line) {
-        const linesLimit = Math.ceil(this.containerWidth/this.step);
+    _createPolygon (x1, y1, x2, y2) {
+        const color = '#0074d9';
+        const width = 1;
+        const polygon = new Svg('polygon');
+        const polygonRectangle = this._getPolygonRectangle.apply(this, arguments);
+        polygon.setNonDomProp('line', arguments);
+        polygon.setProp('points', polygonRectangle.join(' '));
+        polygon.setProp('stroke', color);
+        polygon.setProp('stroke-width', width);
 
+        this._addPolygon(polygon)
+    }
+
+    _getPolygonRectangle(x1, y1, x2, y2) {
+        let rectangle = [];
+
+        let point1 = [x1, y1];
+        rectangle = rectangle.concat(point1);
+
+        let point2 = [x2, y2];
+        rectangle = rectangle.concat(point2);
+
+        let point3 = [x2, this.containerHeight];
+        rectangle = rectangle.concat(point3);
+
+        let point4 = [x1, this.containerHeight];
+        rectangle = rectangle.concat(point4);
+
+        return rectangle;
+    }
+
+    _addPolygon(polygon) {
+        this.polygons.push(polygon);
+
+        if (this.polygons.length > this.elementsLimit) {
+            this._movePolygonsBack();
+        }
+
+        polygon.render(this.polygonContainer);
+    }
+
+    _movePolygonsBack() {
+        this.polygons.shift().remove();
+
+        this.polygons.forEach((polygon) => {
+            const updatedX1 = polygon.line[0] - this.step;
+            const updatedX2 = polygon.line[2] - this.step;
+
+            const updatedPoligonRectacngle = this._getPolygonRectangle.apply(this, [updatedX1, polygon.line[1], updatedX2, polygon.line[3]]);
+            polygon.setProp('points', updatedPoligonRectacngle.join(' '));
+        });
+    }
+
+    _addLine(line) {
         this.lines.push(line);
 
-        if (this.lines.length > linesLimit) {
+        if (this.lines.length > this.elementsLimit) {
             this._moveLinesBack();
         }
 
@@ -100,19 +157,17 @@ class TickerChart {
     }
 
     _addCircle(circle) {
-        const pointsLimit = Math.ceil(this.containerWidth/this.step);
-
         this.points.push(circle);
 
-        if (this.points.length > pointsLimit) {
-            this._movePointssBack();
+        if (this.points.length > this.elementsLimit) {
+            this._movePointsBack();
         }
 
         circle.render(this.pointContainer);
 
     }
 
-    _movePointssBack() {
+    _movePointsBack() {
         this.points.shift().remove();
 
         this.points.forEach((point) => {

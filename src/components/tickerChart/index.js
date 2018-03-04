@@ -44,9 +44,9 @@ class TickerChart {
         const x2 = previousLine ? previousLine.x2 + this.step : this.step;
         const y2 = this.containerHeight - length;
 
+        this._createPolygon(x1, y1, x2, y2);
         this._createCircle(x2, y2);
         this._createLine(x1, y1, x2, y2);
-        this._createPolygon(x1, y1, x2, y2);
 
     }
 
@@ -126,11 +126,12 @@ class TickerChart {
         this.polygons.shift().remove();
 
         this.polygons.forEach((polygon) => {
-            const updatedX1 = polygon.line[0] - this.step;
-            const updatedX2 = polygon.line[2] - this.step;
+            polygon.line[0] = polygon.line[0] - this.step;
+            polygon.line[2] = polygon.line[2] - this.step;
 
-            const updatedPoligonRectacngle = this._getPolygonRectangle.apply(this, [updatedX1, polygon.line[1], updatedX2, polygon.line[3]]);
-            polygon.setProp('points', updatedPoligonRectacngle.join(' '));
+            let updatedPolygonRectangle = this._getPolygonRectangle.apply(this, polygon.line);
+            polygon.setProp('points', updatedPolygonRectangle.join(' '));
+            polygon.setNonDomProp('line', polygon.line);
         });
     }
 

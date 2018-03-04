@@ -12,7 +12,7 @@
     "restart:prod": "forever stopall && forever start server.js",
     "start:dev": "./node_modules/.bin/nodemon server.js"
   },
-  "author": "",
+  "author": "Rinat Ussenov",
   "license": "ISC",
   "dependencies": {
     "basicauth-middleware": "^3.0.0",

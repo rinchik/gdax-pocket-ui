@@ -2,7 +2,7 @@
 class Socket {
 
     constructor(address) {
-        this.socket = io.connect(address);
+        this.socket = io.connect(address, {secure: true});
         return this;
     }
 

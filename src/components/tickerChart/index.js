@@ -82,14 +82,12 @@ class TickerChart {
     }
 
     _createPolygon (x1, y1, x2, y2) {
-        const color = '#0074d9';
-        const width = 1;
+        const fill = 'rgba(0,116,217, 0.5)';
         const polygon = new Svg('polygon');
         const polygonRectangle = this._getPolygonRectangle.apply(this, arguments);
         polygon.setNonDomProp('line', arguments);
         polygon.setProp('points', polygonRectangle.join(' '));
-        polygon.setProp('stroke', color);
-        polygon.setProp('stroke-width', width);
+        polygon.setProp('fill', fill);
 
         this._addPolygon(polygon)
     }
